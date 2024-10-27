@@ -1,6 +1,8 @@
+// src/hooks/useLogin.ts
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
+import { login } from '@/api/authApi';
 
 const useLogin = () => {
   const [email, setEmail] = useState('');
@@ -15,22 +17,9 @@ const useLogin = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Ошибка входа. Проверьте данные.');
-      }
-
-      const data = await response.json();
+      const data = await login({ email, password });
       setToken(data.token);
       navigate('/');
-
     } catch {
       setError('Ошибка входа. Проверьте данные.');
     } finally {
