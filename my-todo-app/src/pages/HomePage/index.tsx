@@ -1,10 +1,12 @@
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
 import StatusBar from '@/pages/StatusBar';
 import InputComponent from '@/components/Input';
 import TaskModal from '@/components/TaskModal.tsx';
+import TaskItem from '@/components/TaskItem/TaskItem.tsx';
 
-import { ETaskStatus } from '@/blueprint/types/TaskTypes.ts';
+import { ETaskStatus, ITask } from '@/blueprint/types/TaskTypes.ts';
 
 const HomePage = () => {
   const [query, setQuery] = useState('');
@@ -36,9 +38,23 @@ const HomePage = () => {
     </button>
   );
 
+  const init_task: ITask = {
+    id: 'fsdf',
+    title: 'fdsfds',
+    status: ETaskStatus.PENDING,
+    assigned_to: null,
+    description: 'fsdfdsf',
+    created_at: dayjs(),
+    updated_at: dayjs(),
+  };
+
+  const renderTasks = () => [init_task, init_task].map((task) => (
+    <TaskItem key={ task.id } data={ task } />
+  ));
+
   return (
     <>
-      <div className='bg-gray-50'>
+      <div className='bg-gray-50 h-screen'>
         <div className='flex flex-col mx-auto max-w-screen-xl px-4'>
           <div className='flex justify-between items-center my-5'>
             <h1 className='text-3xl font-bold text-gray-800'>
@@ -48,10 +64,9 @@ const HomePage = () => {
           </div>
           <InputComponent value={ query } onChange={ handelQuery } />
           <StatusBar statuses={ activeButton } onChange={ handleAddButtonActive } />
-          <section className='task-list bg-white shadow-md rounded-md p-4'>
-            {/* Здесь будет компонент списка задач */}
-            <p>Список задач появится здесь.</p>
-          </section>
+          <div className='grid grid-cols-2 gap-5 bg-white shadow rounded-xl p-4'>
+            {renderTasks()}
+          </div>
         </div>
       </div>
       <TaskModal isOpen={ isModalOpen } onClose={ handleModal }/>

@@ -24,7 +24,7 @@ const StatusBar = ({ statuses, onChange }: IStatusBarProps) => {
           onChange(newStatuses);
         } }
         className={ clsx(
-          'mb-4 px-4 py-2 border border-black rounded-xl duration-200',
+          'mb-4 px-4 py-2 border border-black/20 rounded-xl duration-200',
           checked ? 'bg-blue-600 border-blue-600 text-white' : 'text-black ',
         ) }
       >

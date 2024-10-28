@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export enum ETaskStatus {
   PENDING = 'pending',
   IN_PROGRESS = 'in_progress',
@@ -5,15 +7,17 @@ export enum ETaskStatus {
 }
 
 export interface ITask {
+  id: string;
   title: string;
   description?: string;
   status: ETaskStatus;
   assigned_to?: number | null;
-  created_at?: string;
-  updated_at?: string;
+  created_at?: Dayjs;
+  updated_at?: Dayjs;
 }
 
 export interface ITaskUpdate {
+  id: string;
   title?: string;
   description?: string;
   status?: ETaskStatus;
