@@ -5,3 +5,9 @@ export const STATUS_TASK_TEXT = {
   [ETaskStatus.IN_PROGRESS]: 'В работе',
   [ETaskStatus.DONE]: 'Готово',
 };
+
+export const STATUS_TASK_TEXT_LIST = [
+  'Ожидание',
+  'В работе',
+  'Готово',
+];

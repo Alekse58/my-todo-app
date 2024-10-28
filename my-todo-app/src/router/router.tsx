@@ -1,16 +1,18 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import Login from '@/pages/LoginPage.tsx';
-import MainPage from '@/pages/MainPage.tsx';
+import Login from '@/pages/LoginPage';
+import Index from '@/pages/HomePage';
+
+import { ROUTES } from '@/blueprint/constante/routes.ts';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <MainPage/>,
+    path: ROUTES.HOME_PAGE,
+    element: <Index/>,
   },
   {
-    path: '/login',
+    path: ROUTES.LOGIN,
     element: <Login/>,
   },
 ]);

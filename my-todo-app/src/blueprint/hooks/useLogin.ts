@@ -5,6 +5,8 @@ import { useAuthStore } from '@/store/authStore.ts';
 
 import { login } from '@/blueprint/api/authApi.ts';
 
+import { ROUTES } from '@/blueprint/constante/routes.ts';
+
 const useLogin = () => {
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ const useLogin = () => {
       const data = await login({ email, password });
 
       setToken(data.token);
-      navigate('/');
+      navigate(ROUTES.HOME_PAGE);
     } catch {
       setError('Ошибка входа. Проверьте данные.');
     } finally {

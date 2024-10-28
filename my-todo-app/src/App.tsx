@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Main from '@/pages/MainPage';
+import Main from '@/pages/HomePage';
 import Login from '@/pages/LoginPage';
 import ProtectedLayout from '@/layouts/ProtectedLayout';
 

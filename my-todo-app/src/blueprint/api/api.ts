@@ -1,5 +1,7 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 
+import { ROUTES } from '@/blueprint/constante/routes.ts';
+
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
@@ -42,7 +44,7 @@ apiClient.interceptors.response.use(
           localStorage.removeItem('access');
           localStorage.removeItem('refresh');
 
-          window.location.href = '/login';
+          window.location.href = ROUTES.LOGIN;
         }
       }
     }
