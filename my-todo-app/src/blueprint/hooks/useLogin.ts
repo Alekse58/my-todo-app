@@ -1,15 +1,17 @@
-// src/hooks/useLogin.ts
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '@/store/authStore';
-import { login } from '@/api/authApi';
+
+import { useAuthStore } from '@/store/authStore.ts';
+
+import { login } from '@/blueprint/api/authApi.ts';
 
 const useLogin = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const setToken = useAuthStore((state) => state.setToken);
 
   const handleLogin = async () => {
@@ -18,6 +20,7 @@ const useLogin = () => {
 
     try {
       const data = await login({ email, password });
+
       setToken(data.token);
       navigate('/');
     } catch {

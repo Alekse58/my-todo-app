@@ -8,21 +8,20 @@ const apiClient = axios.create({
   baseURL: 'http://localhost:8000/api',
 });
 
-
 apiClient.interceptors.request.use((config: CustomAxiosRequestConfig) => {
   const token = localStorage.getItem('access');
   if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
-
 
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
-    console.error(error.response?.status);
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -34,21 +33,22 @@ apiClient.interceptors.response.use(
           });
 
           const newAccessToken = response.data.access;
-          localStorage.setItem('access', newAccessToken);
-          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
 
-          return apiClient(originalRequest);
+          localStorage.setItem('access', newAccessToken);
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+          return await apiClient(originalRequest);
         } catch (refreshError) {
-          console.error('Token refresh failed:', refreshError);
           localStorage.removeItem('access');
           localStorage.removeItem('refresh');
+
           window.location.href = '/login';
         }
       }
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

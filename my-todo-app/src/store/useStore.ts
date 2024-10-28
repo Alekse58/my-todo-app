@@ -6,11 +6,11 @@ interface UserState {
   clearToken: () => void;
 }
 
-
 export const useStore = create<UserState>((set) => ({
   token: localStorage.getItem('token'),
   setToken: (token) => {
     set({ token });
+
     if (token) {
       localStorage.setItem('token', token);
     } else {

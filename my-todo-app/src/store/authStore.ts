@@ -1,15 +1,16 @@
 import { create } from 'zustand';
 
-interface AuthState {
+interface IAuthState {
   token: string | null;
   setToken: (token: string | null) => void;
   clearToken: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<IAuthState>((set) => ({
   token: localStorage.getItem('token'),
   setToken: (token) => {
     set({ token });
+
     if (token) {
       localStorage.setItem('token', token);
     } else {
