@@ -1,27 +1,11 @@
-// HomePage.tsx
 import React, { useState } from 'react';
-import StatusBar from '@/pages/StatusBar';
 import InputComponent from '@/components/Input';
-import TaskModal from '@/components/TaskModal.tsx';
-import { ETaskStatus } from '@/blueprint/types/TaskTypes.ts';
-import TaskList from '@/components/TaskItem/TaskList';
+import TaskModal from '@/components/TaskModal';
+import TaskManagement from '@/components/TaskManagement/TaskManagement'; // Импортируем TaskManagement
 
 const HomePage = () => {
   const [query, setQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState<ETaskStatus[]>([]);
-
-  const handleAddButtonActive = (values: ETaskStatus[]) => {
-    const updatedActiveButton = values.reduce((acc: ETaskStatus[], value: ETaskStatus) => {
-      if (acc.includes(value)) {
-        return acc.filter((item) => item !== value);
-      }
-
-      return [...acc, value];
-    }, [...activeButton]);
-
-    setActiveButton(updatedActiveButton);
-  };
 
   const handleModal = () => setIsModalOpen(!isModalOpen);
   const handleQuery = (value: string) => setQuery(value);
@@ -46,8 +30,7 @@ const HomePage = () => {
             {renderButtonCreateTask()}
           </div>
           <InputComponent value={ query } onChange={ handleQuery } />
-          <StatusBar statuses={ activeButton } onChange={ handleAddButtonActive } />
-          <TaskList />
+          <TaskManagement />
         </div>
       </div>
       <TaskModal isOpen={ isModalOpen } onClose={ handleModal } />
