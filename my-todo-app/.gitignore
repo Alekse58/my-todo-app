@@ -5,7 +5,7 @@ build/
 .vscode/
 .idea/
 .yarn/
-
+pnpm-lock.yaml
 
 # Logs
 npm-debug.log*
