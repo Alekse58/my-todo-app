@@ -6,6 +6,8 @@ import { createTask } from '@/blueprint/api/tasksApi.ts';
 import { STATUS_TASK_TEXT } from '@/blueprint/constante/task.ts';
 
 import { ETaskStatus, ITask } from '@/blueprint/types/TaskTypes.ts';
+import InputComponent from '@/components/Input';
+import dayjs from 'dayjs';
 
 interface ITaskModalProps {
   isOpen: boolean;
@@ -29,9 +31,18 @@ const CreateTaskModal = ({ isOpen, onClose }:ITaskModalProps) => {
     setError('');
 
     try {
-      const newTask: ITask = { title, status };
+      const newTask: ITask = {
+        id: '',
+        title,
+        description: '',
+        status,
+        assignedTo: null,
+        created_at: dayjs(),
+        updated_at: dayjs(),
+      };
       await createTask(newTask);
-      onClose();
+
+      window.location.reload();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -52,16 +63,7 @@ const CreateTaskModal = ({ isOpen, onClose }:ITaskModalProps) => {
           Заполните информацию о задаче.
         </Dialog.Description>
         <form onSubmit={ handleSubmit } className='mt-4'>
-          <div>
-            <label className='block text-sm'>Название задачи</label>
-            <input
-              type='text'
-              value={ title }
-              onChange={ (e) => setTitle(e.target.value) }
-              className='border rounded-xl p-2 w-full'
-              required
-            />
-          </div>
+          <InputComponent label='Название задачи' value={ title } onChange={ setTitle } />
           <div className='mt-4'>
             <label className='block text-sm'>Статус</label>
             <select

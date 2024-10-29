@@ -6,12 +6,18 @@ export enum ETaskStatus {
   DONE = 'done',
 }
 
+export interface IAssignedTo {
+  id: number;
+  username: string;
+  email: string;
+}
+
 export interface ITask {
   id: string;
   title: string;
   description?: string;
   status: ETaskStatus;
-  assigned_to?: number | null;
+  assignedTo?: IAssignedTo | null;
   created_at?: Dayjs;
   updated_at?: Dayjs;
 }

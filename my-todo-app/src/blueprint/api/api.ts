@@ -7,7 +7,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const apiClient = axios.create({
-  baseURL: 'http://infiti-heave.ru//api',
+  baseURL: 'https://backend.infiti-heave.ru/api/',
 });
 
 apiClient.interceptors.request.use((config: CustomAxiosRequestConfig) => {
