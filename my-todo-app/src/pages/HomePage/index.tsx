@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import InputComponent from '@/components/Input';
+// import InputComponent from '@/components/Input';
 import TaskModal from '@/components/TaskModal';
-import TaskManagement from '@/components/TaskManagement/TaskManagement'; // Импортируем TaskManagement
+import TaskManagement from '@/components/TaskManagement/TaskManagement';
+import TaskSearch from '@/components/TaskSearch/TaskSearch.tsx'; // Импортируем TaskManagement
 
 const HomePage = () => {
-  const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModal = () => setIsModalOpen(!isModalOpen);
-  const handleQuery = (value: string) => setQuery(value);
+  // const handleQuery = (value: string) => setQuery(value);
 
   const renderButtonCreateTask = () => (
     <button
@@ -29,7 +30,8 @@ const HomePage = () => {
             </h1>
             {renderButtonCreateTask()}
           </div>
-          <InputComponent value={ query } onChange={ handleQuery } />
+          {/* <InputComponent value={ query } onChange={ handleQuery } /> */}
+          <TaskSearch />
           <TaskManagement />
         </div>
       </div>
