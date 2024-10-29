@@ -16,6 +16,14 @@ export interface ITask {
   updated_at?: Dayjs;
 }
 
+export interface ITaskResponse {
+  items: ITask[];
+  itemsCount: number;
+  page: number;
+  pageLimit: number;
+  pages: number;
+}
+
 export interface ITaskUpdate {
   id: string;
   title?: string;

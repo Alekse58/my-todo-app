@@ -1,8 +1,8 @@
-import { ITask, ITaskUpdate } from '@/blueprint/types/TaskTypes.ts';
+import { ITask, ITaskResponse, ITaskUpdate } from '@/blueprint/types/TaskTypes.ts';
 import apiClient from './api.ts';
 
-export const getTasks = async () =>
-  apiClient.get<ITask[]>('/tasks/').then((res) => res.data);
+export const getTasks = async (params?: any) =>
+  apiClient.get<ITaskResponse>('/tasks/get/', { params }).then((res) => res.data);
 
 export const createTask = async (taskData: ITaskUpdate) =>
   apiClient.post<ITask>('/tasks/create/', taskData).then((res) => res.data);

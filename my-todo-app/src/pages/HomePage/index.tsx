@@ -1,12 +1,10 @@
-import dayjs from 'dayjs';
+// HomePage.tsx
 import React, { useState } from 'react';
-
 import StatusBar from '@/pages/StatusBar';
 import InputComponent from '@/components/Input';
 import TaskModal from '@/components/TaskModal.tsx';
-import TaskItem from '@/components/TaskItem/TaskItem.tsx';
-
-import { ETaskStatus, ITask } from '@/blueprint/types/TaskTypes.ts';
+import { ETaskStatus } from '@/blueprint/types/TaskTypes.ts';
+import TaskList from '@/components/TaskItem/TaskList';
 
 const HomePage = () => {
   const [query, setQuery] = useState('');
@@ -16,7 +14,7 @@ const HomePage = () => {
   const handleAddButtonActive = (values: ETaskStatus[]) => {
     const updatedActiveButton = values.reduce((acc: ETaskStatus[], value: ETaskStatus) => {
       if (acc.includes(value)) {
-        return acc.filter(item => item !== value);
+        return acc.filter((item) => item !== value);
       }
 
       return [...acc, value];
@@ -26,31 +24,16 @@ const HomePage = () => {
   };
 
   const handleModal = () => setIsModalOpen(!isModalOpen);
-
-  const handelQuery = (value: string) => setQuery(value);
+  const handleQuery = (value: string) => setQuery(value);
 
   const renderButtonCreateTask = () => (
     <button
       onClick={ handleModal }
       className='mb-4 px-4 py-2 bg-blue-600 text-white rounded-xl'
     >
-      <span>Создать задачу</span>
+      Создать задачу
     </button>
   );
-
-  const init_task: ITask = {
-    id: 'fsdf',
-    title: 'fdsfds',
-    status: ETaskStatus.PENDING,
-    assigned_to: null,
-    description: 'fsdfdsf',
-    created_at: dayjs(),
-    updated_at: dayjs(),
-  };
-
-  const renderTasks = () => [init_task, init_task].map((task) => (
-    <TaskItem key={ task.id } data={ task } />
-  ));
 
   return (
     <>
@@ -62,14 +45,12 @@ const HomePage = () => {
             </h1>
             {renderButtonCreateTask()}
           </div>
-          <InputComponent value={ query } onChange={ handelQuery } />
+          <InputComponent value={ query } onChange={ handleQuery } />
           <StatusBar statuses={ activeButton } onChange={ handleAddButtonActive } />
-          <div className='grid grid-cols-2 gap-5 bg-white shadow rounded-xl p-4'>
-            {renderTasks()}
-          </div>
+          <TaskList />
         </div>
       </div>
-      <TaskModal isOpen={ isModalOpen } onClose={ handleModal }/>
+      <TaskModal isOpen={ isModalOpen } onClose={ handleModal } />
     </>
   );
 };

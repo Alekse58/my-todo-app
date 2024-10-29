@@ -31,7 +31,6 @@ const CreateTaskModal = ({ isOpen, onClose }:ITaskModalProps) => {
     try {
       const newTask: ITask = { title, status };
       await createTask(newTask);
-
       onClose();
     } catch (err: unknown) {
       if (err instanceof Error) {

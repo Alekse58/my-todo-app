@@ -7,7 +7,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'http://infiti-heave.ru//api',
 });
 
 apiClient.interceptors.request.use((config: CustomAxiosRequestConfig) => {
@@ -30,10 +30,9 @@ apiClient.interceptors.response.use(
       const refreshToken = localStorage.getItem('refresh');
       if (refreshToken) {
         try {
-          const response = await axios.post('http://localhost:8000/api/token/refresh/', {
+          const response = await axios.post(`${apiClient.defaults.baseURL}/token/refresh/`, {
             refresh: refreshToken,
           });
-
           const newAccessToken = response.data.access;
 
           localStorage.setItem('access', newAccessToken);
