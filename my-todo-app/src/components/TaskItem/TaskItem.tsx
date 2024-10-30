@@ -22,6 +22,11 @@ const TaskItem = ({ data }: ITaskItemProps) => {
           <p className='text-sm text-gray-600'>
             Статус: {STATUS_TASK_TEXT[data.status]}
           </p>
+          {
+            <p className='text-sm text-gray-600'>
+              Прикреплён к: {data.assignedTo?.username || 'Никто не привязан'}
+            </p>
+          }
           <button
             onClick={ () => setIsModalOpen(true) }
             className='flex justify-end mt-2 text-blue-500'

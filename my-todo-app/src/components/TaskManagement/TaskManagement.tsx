@@ -19,14 +19,13 @@ const TaskManagement = () => {
   };
 
   const fetchTasks = async () => {
-    const response = await getTasks(filter);
-
+    const response = await getTasks({ statuses: selectedStatuses });
     setFilter(response);
   };
 
   useEffect(() => {
     fetchTasks();
-  }, [filter.page]);
+  }, [filter.page, selectedStatuses]);
 
   return (
     <div className='mb-10'>
