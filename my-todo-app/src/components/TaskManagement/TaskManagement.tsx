@@ -20,7 +20,6 @@ const TaskManagement = () => {
 
   const fetchTasks = async () => {
     const response = await getTasks({ statuses: selectedStatuses });
-
     setFilter(response);
   };
 

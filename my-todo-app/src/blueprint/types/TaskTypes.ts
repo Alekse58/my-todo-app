@@ -17,7 +17,7 @@ export interface ITask {
   title: string;
   description?: string;
   status: ETaskStatus;
-  assignedTo: IAssignedTo | null;
+  assignedTo?: IAssignedTo | null;
   created_at?: Dayjs;
   updated_at?: Dayjs;
 }
