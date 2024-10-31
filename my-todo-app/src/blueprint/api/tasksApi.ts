@@ -1,8 +1,8 @@
 import { ETaskStatus, ITask, ITaskResponse, ITaskUpdate } from '@/blueprint/types/TaskTypes.ts';
 import apiClient from './api.ts';
 
-export const getTasks = async (body: { statuses: ETaskStatus[] }) =>
-  apiClient.post<ITaskResponse>('/tasks/filter/', body).then(({ data }) => data);
+export const getTasks = async (body: { statuses: ETaskStatus[] }, page: number) =>
+  apiClient.post<ITaskResponse>(`/tasks/filter/?page=${page}`, body).then(({ data }) => data);
 
 export const getTaskAutoComplete = async (params: string) =>
   apiClient.get<ITaskResponse>(`/tasks/find/?title=${params}`).then(({ data }) => data);

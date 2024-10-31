@@ -24,7 +24,7 @@ const TaskItem = ({ data }: ITaskItemProps) => {
           </p>
           {
             <p className='text-sm text-gray-600'>
-              Прикреплён к: {data.assignedTo?.username || 'Никто не привязан'}
+              Прикреплён к: {data.assigned_to?.username || 'Никто не привязан'}
             </p>
           }
           <button
