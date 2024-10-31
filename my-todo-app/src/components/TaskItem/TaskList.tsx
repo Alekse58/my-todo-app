@@ -4,7 +4,7 @@ import TaskItem from './TaskItem';
 
 interface ITaskListProps {
   tasks: ITask[];
-  lastTaskRef: (node: HTMLDivElement) => void;
+  lastTaskRef?: (node: HTMLDivElement) => void;
 }
 
 const TaskList = ({ tasks, lastTaskRef }: ITaskListProps) => (

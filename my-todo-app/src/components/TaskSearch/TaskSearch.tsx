@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { getTaskAutoComplete } from '@/blueprint/api/tasksApi.ts';
-
-import { ITask } from '@/blueprint/types/TaskTypes.ts';
+import { getTaskAutoComplete } from '@/blueprint/api/tasksApi';
+import { ITask } from '@/blueprint/types/TaskTypes';
 import InputComponent from '@/components/Input';
 import TaskList from '../TaskItem/TaskList';
 
@@ -15,7 +14,6 @@ const TaskSearch = () => {
   const fetchTasks = useCallback(async () => {
     if (query) {
       const response = await getTaskAutoComplete(query);
-
       setTasks(response.items);
     } else {
       clearTasks();
@@ -31,11 +29,11 @@ const TaskSearch = () => {
   return (
     <div>
       <InputComponent
-        value={ query }
+        value={query}
         placeholder='Введите название задачи'
-        onChange={ handleQueryChange }
+        onChange={handleQueryChange}
       />
-      <TaskList tasks={ tasks } />
+      <TaskList tasks={tasks}  />
     </div>
   );
 };
