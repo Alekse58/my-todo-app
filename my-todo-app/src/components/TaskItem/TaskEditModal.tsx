@@ -48,7 +48,12 @@ const TaskEditModal = ({
     setError('');
 
     try {
-      const updatedTask = { id, title: userName, status: taskStatus };
+      const updatedTask = {
+        id,
+        title: userName,
+        status: taskStatus,
+        assigned_to: selectUser ? parseInt(selectUser, 10) : null,
+      };
 
       await updateTask(id, updatedTask);
 
@@ -71,10 +76,8 @@ const TaskEditModal = ({
   const fetchUsers = async () => {
     try {
       const usersList = await getUsers();
-
       setUsers(usersList);
     } catch (err) {
-      console.error('Ошибка при получении пользователей:', err);
     }
   };
 
