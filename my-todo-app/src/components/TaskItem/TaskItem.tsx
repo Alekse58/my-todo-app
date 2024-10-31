@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
 import { ITask } from '@/blueprint/types/TaskTypes.ts';
-
 import { STATUS_TASK_TEXT } from '@/blueprint/constante/task.ts';
 import TaskEditModal from './TaskEditModal';
 
@@ -22,13 +20,11 @@ const TaskItem = ({ data }: ITaskItemProps) => {
           <p className='text-sm text-gray-600'>
             Статус: {STATUS_TASK_TEXT[data.status]}
           </p>
-          {
-            <p className='text-sm text-gray-600'>
-              Прикреплён к: {data.assigned_to?.username || 'Никто не привязан'}
-            </p>
-          }
+          <p className='text-sm text-gray-600'>
+            Прикреплён к: {data.assigned_to ? data.assigned_to.username : 'Никто не привязан'}
+          </p>
           <button
-            onClick={ () => setIsModalOpen(true) }
+            onClick={() => setIsModalOpen(true)}
             className='flex justify-end mt-2 text-blue-500'
           >
             Редактировать
@@ -37,8 +33,8 @@ const TaskItem = ({ data }: ITaskItemProps) => {
       </div>
       {isModalOpen && (
         <TaskEditModal
-          task={ data }
-          onClose={ () => setIsModalOpen(false) }
+          task={data}
+          onClose={() => setIsModalOpen(false)}
           isOpen
         />
       )}
